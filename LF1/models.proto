@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option go_package = "google.golang.org/grpc/examples/route_guide/routeguide";
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.routeguide";
+option java_outer_classname = "RouteGuideProto";
+
+package routeguide;
+
+
+
+
+service RouteGuide {
+  rpc SaveUsers (Users) returns (SaveReply) {}
+  rpc SavePosts (Posts) returns (SaveReply) {}
+  rpc FollowUsers (Search) returns (FollowReply) {}
+  rpc UnfollowUsers (Search) returns (FollowReply) {}
+  rpc LoadUsers (Search) returns (Users) {}
+  rpc LoadPosts (Followings) returns (FollowingsPosts) {}
+}
+
+message Users {
+  string Username = 1;
+  string Password = 2;
+  repeated string FollowingNames = 3;
+  repeated string FollowersNames = 4;
+}
+
+message Posts {
+  string Username = 1;
+  string Timestamp = 2;
+  repeated string Posts = 3;
+}
+
+message FollowingsPosts {
+  repeated Posts FollowingsPosts = 1;
+}
+
+message Search {
+  string username = 1;
+}
+
+message Followings {
+  repeated string usernames = 1;
+}
+
+message SaveReply {
+  bool saved = 1;
+}
+
+message FollowReply {
+  bool followed = 1;
+}
+
+ 
